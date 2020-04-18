@@ -1,0 +1,11 @@
+/include/SFML/*
+/lib/*/*
+/bin/*/*
+/obj/*
+!/bin/*/assets
+/.vscode
+*.o
+*.gch
+GPATH
+GRTAGS
+GTAGS
