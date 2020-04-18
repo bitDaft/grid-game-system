@@ -44,7 +44,7 @@ Grid::~Grid()
 }
 void Grid::update(const sf::Time &)
 {
-  std::cout << "updating grid\n";
+  // std::cout << "updating grid\n";
 }
 void Grid::init()
 {
