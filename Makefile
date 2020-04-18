@@ -17,11 +17,11 @@ OBJ		:= obj\$(COMPILE_ENV)
 OBJS		:= $(addprefix $(OBJ)/, $(notdir $(SRCS:.cpp=.o)))
 
 ifeq ($(COMPILE_ENV),debug)
-LIBRARIES		:= -lsfml-audio-d -lsfml-graphics-d -lsfml-window-d -lsfml-main-d -lsfml-system-d -lte
+LIBRARIES		:= -lte -lsfml-audio-d -lsfml-graphics-d -lsfml-window-d -lsfml-main-d -lsfml-system-d 
 MODE_FLAG		:= -D_DEBUG_=1
 C_FLAGS			+= -og -g
 else
-LIBRARIES		:= -lsfml-audio -lsfml-graphics -lsfml-window -lsfml-main -lsfml-system -lte
+LIBRARIES		:= -lte -lsfml-audio -lsfml-graphics -lsfml-window -lsfml-main -lsfml-system 
 MODE_FLAG		:= -mwindows -D_DEBUG_=0 -DNDEBUG
 C_FLAGS			+= -o3
 endif
