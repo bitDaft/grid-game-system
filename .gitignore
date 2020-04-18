@@ -6,7 +6,6 @@
 /obj/*/*
 !/obj/*/README
 !/bin/*/assets
-/.vscode
 *.o
 *.gch
 GPATH
