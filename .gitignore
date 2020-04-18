@@ -1,7 +1,10 @@
 /include/SFML/*
 /lib/*/*
+!/lib/*/README
 /bin/*/*
-/obj/*
+!/bin/*/README
+/obj/*/*
+!/obj/*/README
 !/bin/*/assets
 /.vscode
 *.o
