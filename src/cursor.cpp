@@ -1,13 +1,16 @@
 
 #include <iostream>
+#include <cmath>
 
 #include "cursor.h"
 #include "globals.h"
 
+#define PI 3.14159265
+
 Cursor::Cursor()
     : IUpdatable(2),
       IDrawable(2),
-      speed(100.f),
+      speed(50.f),
       position(0, 0)
 {
   enableInputHandling();
@@ -31,13 +34,18 @@ void Cursor::setAnimation(Animation &anim)
 }
 void Cursor::update(const sf::Time &dt)
 {
-  sf::Vector2f movement = {
-      (isRight - isLeft) * speed * dt.asSeconds(),
-      (isDown - isUp) * speed * dt.asSeconds()};
-  // std::cout << isRight << " " << isLeft << " " << isUp << " " << isDown << "\n";
-  // std::cout << "x : " << position.x << " y : " << position.y << "\n";
+  float magnitude = (isRight - isLeft != 0) || (isDown - isUp != 0);
+  if (!magnitude)
+  {
+    return;
+  }
+  float angle = atan2f(isDown - isUp, isRight - isLeft);
+  std::cout << angle << "\n";
+  sf::Vector2f movement;
+  movement.x = magnitude * cosf(angle);
+  movement.y = magnitude * sinf(angle);
   cursor.update(dt);
-  position += movement;
+  position += movement * speed * dt.asSeconds();
   cursor.setPosition(position);
 }
 void Cursor::draw(const sf::Time &, sf::RenderTexture &tex)
@@ -47,7 +55,6 @@ void Cursor::draw(const sf::Time &, sf::RenderTexture &tex)
 
 void Cursor::setPosition(sf::Vector2f pos)
 {
-  std::cout << pos.x << " " << pos.y << "\n";
   position.x = pos.x;
   position.y = pos.y;
   cursor.setPosition(position);
