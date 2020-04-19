@@ -5,6 +5,8 @@
 #include <TE/IUpdatable.hpp>
 #include <TE/IDrawable.hpp>
 
+#include "cursor.h"
+
 class Grid : public Game, public IUpdatable, public IDrawable
 {
 public:
@@ -20,6 +22,7 @@ private:
 
 private:
   sf::Sprite grid;
+  Cursor cur;
 };
 
 #endif

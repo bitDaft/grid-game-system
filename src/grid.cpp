@@ -7,6 +7,7 @@
 #include "grid.h"
 
 void generateGridTexture(int, int, int, int);
+void loadCursorAnimation();
 
 Grid::Grid()
     : Game(640, 480, "Grid demo"),
@@ -45,6 +46,7 @@ Grid::Grid()
   _aMapper.bindInputToAction(sf::Event::MouseWheelScrolled, Actions::MOUSE_SCROLL);
 
   generateGridTexture(20, 20, 20, 20);
+  loadCursorAnimation();
 }
 Grid::~Grid()
 {
@@ -61,7 +63,11 @@ void Grid::init()
   _reactionMapper->bindActionToReaction<&Game::quit>(Actions::QUIT);
   _reactionMapper->bindActionToReaction<&Grid::mouseLeftDown>(Actions::MOUSE_LEFT);
   grid.setTexture(ResourceManager::getTexture(10));
-  grid.setPosition((gameWindow.getSize().x / 2) - 200, (gameWindow.getSize().y / 2) - 200);
+  float startX = (gameWindow.getSize().x / 2) - 200;
+  float startY = (gameWindow.getSize().y / 2) - 200;
+  grid.setPosition(startX, startY);
+  cur.setAnimation(ResourceManager::getAnimation(11));
+  cur.setPosition({startX, startY});
 }
 
 bool Grid::mouseLeftDown(sf::Event &)
@@ -99,4 +105,14 @@ void generateGridTexture(
   gridTex.loadFromImage(gridImage);
 
   ResourceManager::loadTexture(10, &gridTex);
+}
+
+void loadCursorAnimation()
+{
+  ResourceManager::loadTextureFromFile(11, "assets/blue-grid-pointer.png");
+  Animation *cursorAnimation = new Animation();
+  cursorAnimation->setTexture(ResourceManager::getTexture(11));
+  cursorAnimation->addFrame(new sf::IntRect(0, 0, 20, 20));
+  cursorAnimation->addFrame(new sf::IntRect(20, 0, 20, 20));
+  ResourceManager::loadAnimation(11, cursorAnimation);
 }
