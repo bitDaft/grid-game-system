@@ -14,7 +14,7 @@ so we need to do border collapse. but that cant be done via sprite or textures. 
 
 so we are going to have the grid obj be drawable.it is not animated so a sprite should do. for the texture we are going to generate it once at the beginning. so maybe in the constructor. or in the init function. but this way of generating this texture cannot be used with the resource system. so we need to have a method in resource to load a generated texture as part of the resource sytem.
 
-TASK 1 : give method in resourceManager to load a generated texture obj.
+~~TASK 1 : give method in resourceManager to load a generated texture obj.~~DONE
 
 where should we initialize this texture. inside the obj makes no sense if multiple of the entities are created. so multiple generation. should we generate in the game obj itself. but then it will become bloatedwith unnecessary loaders i feel. what about loaders in between screens like it is usually done. how does that loading work  
 maybe we will make a loader obj, whose sole purpose or functor is to load the resources into the resoureManager with the predefined handles.
@@ -22,4 +22,7 @@ maybe we will make a loader obj, whose sole purpose or functor is to load the re
 but currently for this specific situation we will just initialize this texture in the constructor or init of the game obj.  
 but we need to add the functionality to add generated texture to the resource manager.  
 so i will be back once the adding of dynamic functionality has been added to the engine.  
+
+i have added functionality to add texture from ptr.
+now lets generate the texture for the grid that we need and display it.
 
