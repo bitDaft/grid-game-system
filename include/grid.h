@@ -34,8 +34,20 @@ private:
   int isUp;
   int isDown;
 
+  int rows;
+  int rowsWidth;
+  int cols;
+  int colsWidth;
+
+
   sf::Sprite grid;
   Cursor cur;
+  sf::Vector2f gridPosition;
+  sf::Vector2f previousGridPosition;
+  sf::Vector2f currentGridPosition;
+  sf::Vector2f cursorPosition;
+  sf::Time inputTimerBlockCounter;
+  bool readyToTakeInput;
 };
 
 #endif

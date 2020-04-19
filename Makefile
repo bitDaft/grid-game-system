@@ -3,7 +3,7 @@ C_FLAGS			:= -std=c++17 -Wall -Wextra
 
 # .PHONY			 = all clean run lib env_debug env_release debug release
 .PHONY			 = all clean run env_debug env_release debug release
-# LIBEXEC			:= libte.a
+LIBEXEC			:= libte.a
 
 
 # debug or release

@@ -6,13 +6,27 @@
 #include "globals.h"
 #include "grid.h"
 
+#define inputHoldTime (sf::seconds(.125f))
+
 void generateGridTexture(int, int, int, int);
 void loadCursorAnimation();
 
 Grid::Grid()
     : Game(640, 480, "Grid demo"),
       IUpdatable(1),
-      IDrawable(1)
+      IDrawable(1),
+      rows(20),
+      rowsWidth(21),
+      cols(20),
+      colsWidth(21),
+      grid(),
+      cur(),
+      gridPosition(0, 0),
+      previousGridPosition(0, 0),
+      currentGridPosition(0, 0),
+      cursorPosition(-20, -20),
+      inputTimerBlockCounter(sf::Time::Zero),
+      readyToTakeInput(true)
 {
   _aMapper.bindInputToAction(sf::Keyboard::Up, sf::Event::KeyPressed, Actions::UP);
   _aMapper.bindInputToAction(sf::Keyboard::Up, sf::Event::KeyReleased, Actions::UP_RELEASE);
@@ -45,14 +59,56 @@ Grid::Grid()
   _aMapper.bindInputToAction(sf::Event::MouseMoved, Actions::MOUSE_MOVED);
   _aMapper.bindInputToAction(sf::Event::MouseWheelScrolled, Actions::MOUSE_SCROLL);
 
-  generateGridTexture(20, 20, 20, 20);
+  generateGridTexture(rows, cols, rowsWidth, colsWidth);
   loadCursorAnimation();
 }
 Grid::~Grid()
 {
 }
-void Grid::update(const sf::Time &)
+void Grid::update(const sf::Time &dt)
 {
+  if (!readyToTakeInput)
+  {
+    inputTimerBlockCounter += dt;
+    if (
+        (!isRight && !isLeft && !isUp && !isDown) ||
+        (inputTimerBlockCounter > inputHoldTime))
+    {
+      inputTimerBlockCounter = sf::Time::Zero;
+      readyToTakeInput = true;
+    }
+  }
+  if (readyToTakeInput)
+  {
+    if (isRight && currentGridPosition.x < rows - 1)
+    {
+      currentGridPosition.x += 1;
+      readyToTakeInput = false;
+    }
+    if (isLeft && currentGridPosition.x > 0)
+    {
+      currentGridPosition.x -= 1;
+      readyToTakeInput = false;
+    }
+    if (isDown && currentGridPosition.y < cols - 1)
+    {
+      currentGridPosition.y += 1;
+      readyToTakeInput = false;
+    }
+    if (isUp && currentGridPosition.y > 0)
+    {
+      currentGridPosition.y -= 1;
+      readyToTakeInput = false;
+    }
+    if (previousGridPosition.x != currentGridPosition.x ||
+        previousGridPosition.y != currentGridPosition.y)
+    {
+      previousGridPosition = currentGridPosition;
+      cursorPosition.x = (gridPosition.x + (currentGridPosition.x * rowsWidth)) + 1;
+      cursorPosition.y = (gridPosition.y + (currentGridPosition.y * colsWidth)) + 1;
+      cur.setPosition(cursorPosition);
+    }
+  }
 }
 void Grid::draw(const sf::Time &, sf::RenderTexture &tex)
 {
@@ -72,11 +128,19 @@ void Grid::init()
   _reactionMapper->bindActionToReaction<&Grid::keyRightReleased>(Actions::RIGHT_RELEASE);
 
   grid.setTexture(ResourceManager::getTexture(10));
-  float startX = (gameWindow.getSize().x / 2) - 200;
-  float startY = (gameWindow.getSize().y / 2) - 200;
+  float startX = (gameWindow.getSize().x / 2) - ((rows * rowsWidth) / 2);
+  float startY = (gameWindow.getSize().y / 2) - ((cols * colsWidth) / 2);
   grid.setPosition(startX, startY);
   cur.setAnimation(ResourceManager::getAnimation(11));
-  cur.setPosition({startX, startY});
+  currentGridPosition.x = 0;
+  currentGridPosition.y = 0;
+  previousGridPosition.x = 0;
+  previousGridPosition.y = 0;
+  gridPosition.x = startX;
+  gridPosition.y = startY;
+  cursorPosition.x = startX + 1;
+  cursorPosition.y = startY + 1;
+  cur.setPosition(cursorPosition);
 }
 
 bool Grid::mouseLeftDown(sf::Event &)
@@ -141,12 +205,12 @@ void generateGridTexture(
     for (int j = 0; j < cols * colWidth; j++)
     {
       if (
-          j % 20 == 0 ||
-          i % 20 == 0 ||
+          i % rowWidth == 0 ||
+          j % colWidth == 0 ||
           i == (rows * rowWidth - 1) ||
           j == (cols * colWidth - 1))
       {
-        gridImage.setPixel(i, j, sf::Color::White);
+        gridImage.setPixel(i, j, sf::Color(50, 50, 50, 255));
       }
     }
   }

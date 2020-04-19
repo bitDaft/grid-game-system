@@ -46,3 +46,9 @@ so now we have lifted state of the cursor up into the grid class.
 so now thegrid will handle input or cursor and it will calculate the new location and send the new position to cursor. the cursor only need to react to its position change. just like react hehe.  
 
 so the cursor states have been lifted into the grid class.now lets change the handle accordingly to wrok properly.
+
+grid movement indiscrete steps as well as blocky movement done.
+
+
+so with that the initial goal of the project has been reached.
+we have created a grid with a cursor that can navigate the grid in discrete steps.
