@@ -18,22 +18,6 @@
       }
     },
     {
-      "label": "build lib",
-      "type": "shell",
-      "group": {
-        "kind": "build",
-        "isDefault": true
-      },
-      "windows": {
-        "command": "powershell",
-        "args": ["-c", "mingw32-make lib"]
-      },
-      "linux": {
-        "command": "bash",
-        "args": ["-c", "make lib"]
-      }
-    },
-    {
       "label": "build & run",
       "type": "shell",
       "group": {

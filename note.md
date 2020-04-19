@@ -5,7 +5,7 @@ now that we have set up a simple game object and linked to the libs properly, it
 lets define our grid first.
 
 the grid is going to be 10 x 10. each cell is going to be 10px x 10px. this will give a grid of 100px x 100px.  
-since we have the real estate lets double it. 20 x 20 grid with 20px x 20px. should gi9ve us 400px x 400px. this will just fit in our screen width.
+since we have the real estate lets double it. 20 x 20 grid with 20px x 20px. should gi9ve us 400px x 400px. this will just fit in our screen height.
 
 next, should the grid be drawn. normally in games the grid can be toggled on or off. so the grid map is layer of its own which may or may not be drawn.
 
