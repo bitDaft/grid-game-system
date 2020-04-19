@@ -1,8 +1,8 @@
 
 #include <iostream>
 
-#include "grid.h"
 #include "globals.h"
+#include "grid.h"
 
 Grid::Grid()
     : Game(640, 480, "Grid demo"),
@@ -16,7 +16,6 @@ Grid::Grid()
   _aMapper.bindInputToAction(sf::Keyboard::Left, sf::Event::KeyReleased, Actions::LEFT_RELEASE);
   _aMapper.bindInputToAction(sf::Keyboard::Right, sf::Event::KeyPressed, Actions::RIGHT);
   _aMapper.bindInputToAction(sf::Keyboard::Right, sf::Event::KeyReleased, Actions::RIGHT_RELEASE);
-  _aMapper.bindInputToAction(sf::Keyboard::Escape, sf::Event::KeyPressed, Actions::QUIT);
   _aMapper.bindInputToAction(sf::Keyboard::W, sf::Event::KeyPressed, Actions::UP);
   _aMapper.bindInputToAction(sf::Keyboard::W, sf::Event::KeyReleased, Actions::UP_RELEASE);
   _aMapper.bindInputToAction(sf::Keyboard::S, sf::Event::KeyPressed, Actions::DOWN);
@@ -25,6 +24,7 @@ Grid::Grid()
   _aMapper.bindInputToAction(sf::Keyboard::A, sf::Event::KeyReleased, Actions::LEFT_RELEASE);
   _aMapper.bindInputToAction(sf::Keyboard::D, sf::Event::KeyPressed, Actions::RIGHT);
   _aMapper.bindInputToAction(sf::Keyboard::D, sf::Event::KeyReleased, Actions::RIGHT_RELEASE);
+  _aMapper.bindInputToAction(sf::Keyboard::Escape, sf::Event::KeyPressed, Actions::QUIT);
 
   _aMapper.bindInputToAction(sf::Mouse::Button::Left, sf::Event::MouseButtonPressed, Actions::MOUSE_LEFT);
   _aMapper.bindInputToAction(sf::Mouse::Button::Left, sf::Event::MouseButtonReleased, Actions::MOUSE_LEFT_RELEASE);
@@ -48,11 +48,12 @@ void Grid::update(const sf::Time &)
 }
 void Grid::init()
 {
-  _reactionMapper->bindActionToReaction<&Grid::mouseLeftDown>(Actions::MOUSE_LEFT);
+  _reactionMapper->bindActionToReaction<&Game::quit>(Actions::QUIT);
+  _reactionMapper->bindActionToReaction<&Grid::mouseLeftDown>(Actions::MOUSE_MOVED);
 }
 
 bool Grid::mouseLeftDown(sf::Event &)
-	{
-		std::cout << "Pressed left\n";
-		return false;
-	}
+{
+  std::cout << "Pressed left\n";
+  return false;
+}
