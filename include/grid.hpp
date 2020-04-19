@@ -5,7 +5,7 @@
 #include <TE/IUpdatable.hpp>
 #include <TE/IDrawable.hpp>
 
-#include "cursor.h"
+#include "cursor.hpp"
 
 class Grid : public Game, public IUpdatable, public IDrawable
 {

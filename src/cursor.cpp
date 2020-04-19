@@ -1,8 +1,8 @@
 
 #include <iostream>
 
-#include "cursor.h"
-#include "globals.h"
+#include "cursor.hpp"
+#include "globals.hpp"
 
 Cursor::Cursor()
     : IUpdatable(2),

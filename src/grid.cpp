@@ -3,8 +3,8 @@
 
 #include <TE/ResourceManager.hpp>
 
-#include "globals.h"
-#include "grid.h"
+#include "globals.hpp"
+#include "grid.hpp"
 
 #define inputHoldTime (sf::seconds(.125f))
 

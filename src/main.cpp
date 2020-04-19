@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "grid.h"
+#include "grid.hpp"
 
 int main(int argc, char const *argv[])
 {
