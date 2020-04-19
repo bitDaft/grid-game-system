@@ -26,3 +26,13 @@ so i will be back once the adding of dynamic functionality has been added to the
 i have added functionality to add texture from ptr.
 now lets generate the texture for the grid that we need and display it.
 
+----------------------------------------------
+
+Now we have the grid being displayed and the texture us being generated.
+no we need a sprite to show the tile that is currently selected.
+so lets open up asesprite and make it.
+
+ok now we have made a simple grid location selector cursor.  
+now we need to make this cursor object along with animatedsprite and movement controls for the cursor.  
+so lets make that cursor object now.  
+
