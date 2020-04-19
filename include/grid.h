@@ -19,8 +19,21 @@ public:
 
 private:
   bool mouseLeftDown(sf::Event &);
+  bool keyLeftPressed(sf::Event &);
+  bool keyUpPressed(sf::Event &);
+  bool keyDownPressed(sf::Event &);
+  bool keyRightPressed(sf::Event &);
+  bool keyLeftReleased(sf::Event &);
+  bool keyUpReleased(sf::Event &);
+  bool keyDownReleased(sf::Event &);
+  bool keyRightReleased(sf::Event &);
 
 private:
+  int isLeft;
+  int isRight;
+  int isUp;
+  int isDown;
+
   sf::Sprite grid;
   Cursor cur;
 };

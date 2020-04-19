@@ -8,7 +8,7 @@
 #include <TE/AnimatedSprite.hpp>
 #include <TE/InputHandler.hpp>
 
-class Cursor : public InputHandler, public IUpdatable, public IDrawable
+class Cursor : public IUpdatable, public IDrawable
 {
 public:
   Cursor();
@@ -22,23 +22,6 @@ public:
   void setPosition(sf::Vector2f pos);
 
 private:
-  bool keyLeftPressed(sf::Event &);
-  bool keyUpPressed(sf::Event &);
-  bool keyDownPressed(sf::Event &);
-  bool keyRightPressed(sf::Event &);
-  bool keyLeftReleased(sf::Event &);
-  bool keyUpReleased(sf::Event &);
-  bool keyDownReleased(sf::Event &);
-  bool keyRightReleased(sf::Event &);
-
-private:
-  int isLeft;
-  int isRight;
-  int isUp;
-  int isDown;
-
-  float speed;
-
   AnimatedSprite cursor;
   sf::Vector2f position;
 };

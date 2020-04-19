@@ -36,3 +36,13 @@ ok now we have made a simple grid location selector cursor.
 now we need to make this cursor object along with animatedsprite and movement controls for the cursor.  
 so lets make that cursor object now.  
 
+
+now that we have a cursor and we can move itr around, we need to have it stick to the grid locations.  
+meaning it cannot have continuos values, but discrete values from the grid.  
+if the cursor where to hold its own position it would also need to know on what position of the grid it is and what the start location of the grid and other details of the grid.  
+but if the grid kept track of the cursor then the grid can just tell the cursor to go to whatever location the grid tells.   
+and the cursor need not bother with keeping track of any details or having any functions to send data to grid when its position changes.  
+so now we have lifted state of the cursor up into the grid class.  
+so now thegrid will handle input or cursor and it will calculate the new location and send the new position to cursor. the cursor only need to react to its position change. just like react hehe.  
+
+so the cursor states have been lifted into the grid class.now lets change the handle accordingly to wrok properly.

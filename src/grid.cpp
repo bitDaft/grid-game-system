@@ -62,6 +62,15 @@ void Grid::init()
 {
   _reactionMapper->bindActionToReaction<&Game::quit>(Actions::QUIT);
   _reactionMapper->bindActionToReaction<&Grid::mouseLeftDown>(Actions::MOUSE_LEFT);
+  _reactionMapper->bindActionToReaction<&Grid::keyDownPressed>(Actions::DOWN);
+  _reactionMapper->bindActionToReaction<&Grid::keyUpPressed>(Actions::UP);
+  _reactionMapper->bindActionToReaction<&Grid::keyLeftPressed>(Actions::LEFT);
+  _reactionMapper->bindActionToReaction<&Grid::keyRightPressed>(Actions::RIGHT);
+  _reactionMapper->bindActionToReaction<&Grid::keyUpReleased>(Actions::UP_RELEASE);
+  _reactionMapper->bindActionToReaction<&Grid::keyDownReleased>(Actions::DOWN_RELEASE);
+  _reactionMapper->bindActionToReaction<&Grid::keyLeftReleased>(Actions::LEFT_RELEASE);
+  _reactionMapper->bindActionToReaction<&Grid::keyRightReleased>(Actions::RIGHT_RELEASE);
+
   grid.setTexture(ResourceManager::getTexture(10));
   float startX = (gameWindow.getSize().x / 2) - 200;
   float startY = (gameWindow.getSize().y / 2) - 200;
@@ -73,6 +82,47 @@ void Grid::init()
 bool Grid::mouseLeftDown(sf::Event &)
 {
   std::cout << "Pressed left\n";
+  return false;
+}
+
+bool Grid::keyLeftPressed(sf::Event &)
+{
+  isLeft = 1;
+  return false;
+}
+bool Grid::keyUpPressed(sf::Event &)
+{
+  isUp = 1;
+  return false;
+}
+bool Grid::keyDownPressed(sf::Event &)
+{
+  isDown = 1;
+  return false;
+}
+bool Grid::keyRightPressed(sf::Event &)
+{
+  isRight = 1;
+  return false;
+}
+bool Grid::keyLeftReleased(sf::Event &)
+{
+  isLeft = 0;
+  return false;
+}
+bool Grid::keyUpReleased(sf::Event &)
+{
+  isUp = 0;
+  return false;
+}
+bool Grid::keyDownReleased(sf::Event &)
+{
+  isDown = 0;
+  return false;
+}
+bool Grid::keyRightReleased(sf::Event &)
+{
+  isRight = 0;
   return false;
 }
 
